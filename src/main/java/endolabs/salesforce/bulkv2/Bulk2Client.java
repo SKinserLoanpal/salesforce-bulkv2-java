@@ -20,7 +20,7 @@ public class Bulk2Client {
 
     private static final Logger log = LoggerFactory.getLogger(Bulk2Client.class);
 
-    private static final String API_VERSION = "v41.0";
+    private static final String API_VERSION = "v62.0";
 
     private final RestRequester requester;
 
@@ -55,13 +55,13 @@ public class Bulk2Client {
 
     public void uploadJobData(String jobId, String csvContent) {
         String url = buildUrl("/services/data/vXX.X/jobs/ingest/" + jobId + "/batches");
-
+        log.info(url);
         requester.putCsv(url, csvContent, Void.class);
     }
 
     public void deleteJob(String jobId) {
         String url = buildUrl("/services/data/vXX.X/jobs/ingest/" + jobId);
-
+        log.info(url);
         requester.delete(url, null, Void.class);
     }
 
@@ -75,31 +75,31 @@ public class Bulk2Client {
 
         GetAllJobsRequest.Builder builder = new GetAllJobsRequest.Builder();
         requestBuilder.accept(builder);
-
+        log.debug(url);
         return requester.get(url, builder.buildParameters(), GetAllJobsResponse.class);
     }
 
     public GetJobInfoResponse getJobInfo(String jobId) {
         String url = buildUrl("/services/data/vXX.X/jobs/ingest/" + jobId);
-
+        log.debug(url);
         return requester.get(url, GetJobInfoResponse.class);
     }
 
     public Reader getJobSuccessfulRecordResults(String jobId) {
         String url = buildUrl("/services/data/vXX.X/jobs/ingest/" + jobId + "/successfulResults/");
-
+        log.debug(url);
         return requester.getCsv(url);
     }
 
     public Reader getJobFailedRecordResults(String jobId) {
         String url = buildUrl("/services/data/vXX.X/jobs/ingest/" + jobId + "/failedResults/");
-
+        log.debug(url);
         return requester.getCsv(url);
     }
 
     public Reader getJobUnprocessedRecordResults(String jobId) {
         String url = buildUrl("/services/data/vXX.X/jobs/ingest/" + jobId + "/unprocessedrecords/");
-
+        log.debug(url);
         return requester.getCsv(url);
     }
 

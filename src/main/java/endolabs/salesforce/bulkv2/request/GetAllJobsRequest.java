@@ -39,7 +39,7 @@ public class GetAllJobsRequest {
         }
 
         public Map<String, String> buildParameters() {
-            Map<String, String> queryParams = new HashMap<>();
+            Map<String, String> queryParams = new HashMap<String, String>();
             if (concurrencyMode != null) {
                 queryParams.put("concurrencyMode", concurrencyMode.toJsonValue());
             }

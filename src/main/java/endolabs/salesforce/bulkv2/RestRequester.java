@@ -40,15 +40,15 @@ public class RestRequester {
     public <T> T putCsv(String url, String requestData, Class<T> responseClass) {
         RequestBody requestBody = (requestData == null) ? null : RequestBody.create(CSV_MEDIA_TYPE, ByteString.encodeUtf8(requestData));
 
-        return request(url, "PUT", new HashMap<>(), requestBody, responseClass);
+        return request(url, "PUT", new HashMap<String, String>(), requestBody, responseClass);
     }
 
     public Reader getCsv(String url) {
-        return request(url, "GET", new HashMap<>(), null, Reader.class);
+        return request(url, "GET", new HashMap<String, String>(), null, Reader.class);
     }
 
     public <T> T get(String url, Class<T> responseClass) {
-        return request(url, "GET", new HashMap<>(), null, responseClass);
+        return request(url, "GET", new HashMap<String, String>(), null, responseClass);
     }
 
     public <T> T get(String url, Map<String, String> queryParams, Class<T> responseClass) {
@@ -75,19 +75,19 @@ public class RestRequester {
             }
         }
 
-        return requestJson(url, "POST", new HashMap<>(), transformedRequest, responseClass);
+        return requestJson(url, "POST", new HashMap<String, String>(), transformedRequest, responseClass);
     }
 
     public <T> T put(String url, Object requestData, Class<T> responseClass) {
-        return requestJson(url, "PUT", new HashMap<>(), requestData, responseClass);
+        return requestJson(url, "PUT", new HashMap<String, String>(), requestData, responseClass);
     }
 
     public <T> T delete(String url, Object requestData, Class<T> responseClass) {
-        return requestJson(url, "DELETE", new HashMap<>(), requestData, responseClass);
+        return requestJson(url, "DELETE", new HashMap<String, String>(), requestData, responseClass);
     }
 
     public <T> T patch(String url, Object requestData, Class<T> responseClass) {
-        return requestJson(url, "PATCH", new HashMap<>(), requestData, responseClass);
+        return requestJson(url, "PATCH", new HashMap<String, String>(), requestData, responseClass);
     }
 
     private <T> T requestJson(String url, String httpMethod, Map<String, String> queryParams, Object requestData, Class<T> responseClass) {

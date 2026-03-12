@@ -1,5 +1,5 @@
 apply plugin: 'java'
-
+apply plugin: 'maven-publish'
 repositories {
     jcenter()
     mavenCentral()
@@ -14,4 +14,15 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.2.3'
 
     testImplementation 'junit:junit:4.12'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'endolabs.salesforce'
+            artifactId = 'bulkv2'
+            version = '1.0.0'
+            from components.java
+        }
+    }
 }
